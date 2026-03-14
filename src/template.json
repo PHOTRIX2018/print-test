@@ -1,0 +1,77 @@
+{
+  "BankCode": "BANK0001",
+  "ShortCode": "ADCB",
+  "BankName": "ABU DHABI COMMERCIAL BANK",
+  "ChequeSize": "9.90 x 19.90 cm",
+  "Country": "United Arab Emirates",
+
+  "Height": 9,
+  "Width": 19,
+
+  "DatePosition": {
+    "x": 14,
+    "y": 2
+  },
+
+  "NamePosition": {
+    "x": 2,
+    "y": 4
+  },
+
+  "Name2Position": {
+    "x": 2,
+    "y": 4.5
+  },
+
+  "AmountWordsPosition": {
+    "x": 2,
+    "y": 5
+  },
+
+  "AmountWords2Position": {
+    "x": 2,
+    "y": 5.5
+  },
+
+  "AmountPosition": {
+    "x": 13,
+    "y": 5.5
+  },
+
+  "ACPayeePosition": {
+    "x": 3,
+    "y": 2
+  },
+
+  "BeingPosition": {
+    "x": 1,
+    "y": 8
+  },
+
+  "NameBefore": "**",
+  "NameAfter": "**",
+
+  "AmountWordsBefore": "**",
+  "AmountWordsAfter": "**",
+
+  "AmountBefore": "#",
+  "AmountAfter": "#",
+
+  "DecimalPlaces": 2,
+
+  "MarginTop": 0,
+  "MarginRight": 0,
+  "MarginLeft": 0,
+  "MarginBottom": 0,
+
+  "FeedingPosition": "RIGHT",
+  "PrintPosition": "VERTICAL",
+
+  "CrossLabel": "A/C Payee",
+
+  "DateFormat": null,
+
+  "Provision1": null,
+  "Provision2": null,
+  "Provision3": null
+}
