@@ -8,6 +8,19 @@ const FIELD_ORDER = ["date", "payee", "name", "name2", "amountWords", "amountWor
 const ChequeDesign = React.forwardRef((props, ref) => {
   const cmToPx = (cm) => cm * 37.8;
 
+  const [chequeSize, setChequeSize] = React.useState({
+    width: template.Width,
+    height: template.Height,
+  });
+
+  const [margins, setMargins] = React.useState({
+  top: template.MarginTop,
+  right: template.MarginRight,
+  left: template.MarginLeft,
+  bottom: template.MarginBottom
+});
+
+const [isPrinting, setIsPrinting] = React.useState(false);
   const [positions, setPositions] = React.useState({
     date:         { x: template.DatePosition.x,         y: template.DatePosition.y,         fontSize: 1.2, visible: true },
     payee:        { x: template.ACPayeePosition.x,      y: template.ACPayeePosition.y,      fontSize: 1.0, visible: true },
@@ -108,6 +121,83 @@ const ChequeDesign = React.forwardRef((props, ref) => {
 
         {/* Field cards */}
         <div style={{ flex: 1, overflowY: "auto", padding: "12px", display: "flex", flexDirection: "column", gap: 0 }}>
+          {/* Cheque Size Card */}
+<div
+  style={{
+    padding: "12px",
+    borderRadius: 12,
+    border: "1px solid #e2e8f0",
+    marginBottom: 8,
+    backgroundColor: "#f8fafc"
+  }}
+>
+
+  <div style={{
+    fontSize: 12,
+    fontWeight: 700,
+    textTransform: "uppercase",
+    color: "#374151",
+    letterSpacing: "0.04em",
+    marginBottom: 8
+  }}>
+    Cheque Size
+  </div>
+
+  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
+
+    <div>
+      <label style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", color: "#94a3b8" }}>
+        Height
+      </label>
+      <input
+        type="number"
+        value={chequeSize.height}
+        onChange={(e) =>
+          setChequeSize(prev => ({
+            ...prev,
+            height: parseFloat(e.target.value) || 0
+          }))
+        }
+        style={{
+          width: "100%",
+          boxSizing: "border-box",
+          fontSize: 12,
+          border: "1px solid #e2e8f0",
+          borderRadius: 8,
+          padding: "6px",
+          fontFamily: "monospace"
+        }}
+      />
+    </div>
+
+    <div>
+      <label style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", color: "#94a3b8" }}>
+        Width
+      </label>
+      <input
+        type="number"
+        value={chequeSize.width}
+        onChange={(e) =>
+          setChequeSize(prev => ({
+            ...prev,
+            width: parseFloat(e.target.value) || 0
+          }))
+        }
+        style={{
+          width: "100%",
+          boxSizing: "border-box",
+          fontSize: 12,
+          border: "1px solid #e2e8f0",
+          borderRadius: 8,
+          padding: "6px",
+          fontFamily: "monospace"
+        }}
+      />
+    </div>
+
+  </div>
+
+</div>
           {FIELD_ORDER.map((key) => {
             const field = positions[key];
             const isActive = activeField === key;
@@ -184,6 +274,131 @@ const ChequeDesign = React.forwardRef((props, ref) => {
               </div>
             );
           })}
+
+{/* Margins Card */}
+<div
+  style={{
+    padding: "12px",
+    borderRadius: 12,
+    border: "1px solid #e2e8f0",
+    marginBottom: 8,
+    backgroundColor: "#f8fafc"
+  }}
+>
+  <div
+    style={{
+      fontSize: 12,
+      fontWeight: 700,
+      textTransform: "uppercase",
+      color: "#374151",
+      letterSpacing: "0.04em",
+      marginBottom: 8
+    }}
+  >
+    Margins
+  </div>
+
+  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
+
+    <div>
+      <label style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", color: "#94a3b8" }}>
+        Top
+      </label>
+      <input
+        type="number"
+        value={margins.top}
+        onChange={(e) =>
+          setMargins(prev => ({
+            ...prev,
+            top: parseFloat(e.target.value) || 0
+          }))
+        }
+        style={{
+          width: "100%",
+          fontSize: 12,
+          border: "1px solid #e2e8f0",
+          borderRadius: 8,
+          padding: "6px",
+          fontFamily: "monospace"
+        }}
+      />
+    </div>
+
+    <div>
+      <label style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", color: "#94a3b8" }}>
+        Right
+      </label>
+      <input
+        type="number"
+        value={margins.right}
+        onChange={(e) =>
+          setMargins(prev => ({
+            ...prev,
+            right: parseFloat(e.target.value) || 0
+          }))
+        }
+        style={{
+          width: "100%",
+          fontSize: 12,
+          border: "1px solid #e2e8f0",
+          borderRadius: 8,
+          padding: "6px",
+          fontFamily: "monospace"
+        }}
+      />
+    </div>
+
+    <div>
+      <label style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", color: "#94a3b8" }}>
+        Left
+      </label>
+      <input
+        type="number"
+        value={margins.left}
+        onChange={(e) =>
+          setMargins(prev => ({
+            ...prev,
+            left: parseFloat(e.target.value) || 0
+          }))
+        }
+        style={{
+          width: "100%",
+          fontSize: 12,
+          border: "1px solid #e2e8f0",
+          borderRadius: 8,
+          padding: "6px",
+          fontFamily: "monospace"
+        }}
+      />
+    </div>
+
+    <div>
+      <label style={{ fontSize: 9, fontWeight: 700, textTransform: "uppercase", color: "#94a3b8" }}>
+        Bottom
+      </label>
+      <input
+        type="number"
+        value={margins.bottom}
+        onChange={(e) =>
+          setMargins(prev => ({
+            ...prev,
+            bottom: parseFloat(e.target.value) || 0
+          }))
+        }
+        style={{
+          width: "100%",
+          fontSize: 12,
+          border: "1px solid #e2e8f0",
+          borderRadius: 8,
+          padding: "6px",
+          fontFamily: "monospace"
+        }}
+      />
+    </div>
+
+  </div>
+</div>
+
         </div>
       </div>
 
@@ -191,21 +406,13 @@ const ChequeDesign = React.forwardRef((props, ref) => {
           CHEQUE PREVIEW — original PrintTest code, fields made draggable
           ════════════════════════════════════════════════════════════════════ */}
       <div style={{ padding: "20px" }}>
-        <style>
-          {`
-            @media print {
-              @page { size: landscape; margin: 0mm; }
-              body { margin: 0; }
-            }
-          `}
-        </style>
 
         <div
           ref={ref}
           className="printable-cheque"
           style={{
-            width: cmToPx(template.Width),
-            height: cmToPx(template.Height),
+          width: cmToPx(chequeSize.width),
+          height: cmToPx(chequeSize.height),
             border: "2px dashed #333",
             margin: "0 auto",
             position: "relative",
@@ -213,6 +420,9 @@ const ChequeDesign = React.forwardRef((props, ref) => {
             color: "#000",
             fontFamily: "'Courier New', Courier, monospace",
             textAlign: "left",
+
+  /* PRINT POSITION */
+  transform: `translate(${margins.left}cm, ${margins.top}cm)`
           }}
         >
         {/* A/C PAYEE ONLY */}
