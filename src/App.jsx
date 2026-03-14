@@ -91,8 +91,30 @@ const [isPrinting, setIsPrinting] = React.useState(false);
     userSelect:      "none",
   });
 
+
   return (
     <div style={{ display: "flex", gap: 0, alignItems: "flex-start", textAlign: "left" }}>
+
+      <style>
+{`
+@media print {
+
+  .printable-cheque {
+    margin-top: ${margins.top}cm !important;
+    margin-left: ${margins.left}cm !important;
+  }
+
+  body {
+    margin:0;
+  }
+
+  @page {
+    margin:0;
+  }
+
+}
+`}
+</style>
 
       {/* ════════════════════════════════════════════════════════════════════
           LEFT SIDEBAR — exact MyTemplateDesigner style
@@ -421,8 +443,6 @@ const [isPrinting, setIsPrinting] = React.useState(false);
             fontFamily: "'Courier New', Courier, monospace",
             textAlign: "left",
 
-  /* PRINT POSITION */
-  transform: `translate(${margins.left}cm, ${margins.top}cm)`
           }}
         >
         {/* A/C PAYEE ONLY */}
@@ -570,10 +590,28 @@ const [isPrinting, setIsPrinting] = React.useState(false);
 const PrintTest = () => {
   const componentRef = useRef(null);
 
-  const handlePrint = useReactToPrint({
-    contentRef: componentRef,
-    documentTitle: "Cheque_Print_Job",
-  });
+const handlePrint = useReactToPrint({
+  contentRef: componentRef,
+  documentTitle: "Cheque_Print_Job",
+
+  pageStyle: `
+    @page {
+      margin: 0;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    .printable-cheque {
+    margin-top: ${template.MarginTop}cm !important;
+    margin-left: ${template.MarginLeft}cm !important;
+    margin-right: ${template.MarginRight}cm !important;
+    margin-bottom: ${template.MarginBottom}cm !important;
+    }
+  `
+});
+
 
   return (
     <div
