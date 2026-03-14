@@ -375,7 +375,7 @@ const PrintTest = () => {
         color: "white",
       }}
     >
-      <h1 style={{ marginBottom: "20px" }}>Cheque Software Test</h1>
+      <h1 style={{ marginBottom: "20px" }}>Cheque Software Test (Demo)</h1>
 
       <button
         onClick={() => handlePrint()}
